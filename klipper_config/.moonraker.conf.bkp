@@ -4,6 +4,7 @@ port: 7125
 enable_debug_logging: False
 config_path: /home/pi/klipper_config
 log_path: /home/pi/klipper_logs
+enable_object_processing: True
 
 [authorization]
 #enabled: True
