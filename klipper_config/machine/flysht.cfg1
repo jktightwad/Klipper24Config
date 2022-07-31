@@ -1,0 +1,105 @@
+
+##flySHT BASE Config##
+## SHT
+[mcu shtcan]
+canbus_uuid: 5b18e8322e7d
+
+## SHT
+[temperature_sensor FLY-SHT]
+sensor_type: temperature_mcu
+sensor_mcu: shtcan
+
+## FAN0
+#[fan]
+#pin: shtcan:PB10
+
+## FAN1
+#[fan_generic fan]
+#pin: shtcan:PB10
+
+[heater_fan hotend_fan]
+pin: shtcan:PB10
+max_power: 1.0
+kick_start_time: 0.7
+heater: extruder
+heater_temp: 50.0
+fan_speed: 1.0	                                                    # You can't PWM the delta fan unless using blue wire
+
+[fan]
+pin: shtcan:PB11
+max_power: 1.0
+kick_start_time: 0.7                                                # Depending on your fan, you may need to increase this value if your fan will not start
+off_below: 0.13
+cycle_time: 0.010
+
+## X ###NOT NEEDED WITH SENSORLESS HOMING
+#[stepper_x]
+#endstop_pin: !shtcan:PA0
+## SHTPA0,PA1,PA2
+
+[extruder]
+step_pin: shtcan:PB4
+dir_pin: !shtcan:PB3
+enable_pin: !shtcan:PA15
+microsteps: 16
+rotation_distance: 22.6
+gear_ratio: 50:10                                                   # For Mini Afterburner
+nozzle_diameter: 0.400
+filament_diameter: 1.750
+heater_pin: shtcan:PA8
+sensor_pin: shtcan:PB0
+sensor_type: ATC Semitec 104GT-2 #Generic 3950 #Trianglelab NTC100K B3950 #EPCOS 100K B57560G104F
+pullup_resistor: 2200 #2100
+#control: pid
+#pid_Kp: 22.2
+#pid_Ki: 1.08
+#pid_Kd: 114
+min_temp: -180
+max_temp: 300
+min_extrude_temp: 15
+max_extrude_only_distance: 780 #150
+max_extrude_cross_section: 0.8
+pressure_advance: 0.0340 #After Lines Test #0.0375                                               # See tuning pressure advance doc
+pressure_advance_smooth_time: 0.040
+
+[tmc2209 extruder]
+uart_pin: shtcan:PB5
+interpolate: False
+run_current: 0.25
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+
+## RGB
+[neopixel my_neopixel]
+pin: shtcan:PB15
+chain_count: 12
+color_order: GRB
+initial_RED: 0.0
+initial_GREEN: 0.0
+initial_BLUE: 0.0
+
+[probe]
+pin: ^shtcan:PC15 #E0-Stop Connection on SKR mini E3 V2
+
+## ADXL345
+[adxl345 toolhead]
+cs_pin: shtcan:PA4
+spi_bus: spi1
+
+## BLTOUCH
+#[bltouch]
+#sensor_pin: ^shtcan:PC15
+#control_pin: shtcan:PB1
+#x_offset: -26.1
+#y_offset: -15.3
+#z_offset: 2.1
+
+## PT100
+#[temperature_sensor PT100]
+#sensor_type: MAX31865
+#sensor_pin: shtcan:PA3
+#spi_bus: spi1
+#min_temp: -50
+#max_temp: 350
+#rtd_reference_r: 430
