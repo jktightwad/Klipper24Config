@@ -1,0 +1,16 @@
+
+###############################################################################
+#          Resonance testing
+###############################################################################
+
+[gcode_shell_command process_res]
+command: /home/pi/printer_data/config/.scripts/process_resonances.sh
+timeout: 180.
+verbose: True
+
+[gcode_macro TEST_ALL_RESONANCES]
+description: Perform X, Y resonance tests, takes a while of course
+gcode:
+    TEST_RESONANCES AXIS=X #FREQ_START=30 FREQ_END=150
+    TEST_RESONANCES AXIS=Y #FREQ_START=30 FREQ_END=150
+    RUN_SHELL_COMMAND CMD=process_res
