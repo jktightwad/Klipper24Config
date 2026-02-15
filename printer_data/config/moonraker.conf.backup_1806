@@ -23,9 +23,6 @@ cors_domains:
 
 [octoprint_compat]
 
-[file_manager]
-enable_object_processing: True
-
 [history]
 
 [update_manager]
@@ -53,41 +50,3 @@ managed_services: KlipperScreen
 env: /home/pi/.KlipperScreen-env/bin/python
 requirements: /home/pi/KlipperScreen/scripts/KlipperScreen-requirements.txt
 install_script: /home/pi/KlipperScreen/scripts/KlipperScreen-install.sh
-
-# Crowsnest update_manager entry
-[update_manager crowsnest]
-type: git_repo
-path: ~/crowsnest
-origin: https://github.com/mainsail-crew/crowsnest.git
-managed_services: crowsnest
-install_script: tools/pkglist.sh
-[update_manager klipper-backup]
-type: git_repo
-path: ~/klipper-backup
-origin: https://github.com/Staubgeborener/klipper-backup.git
-managed_services: moonraker
-primary_branch: main
-
-[update_manager cartographer]
-type: git_repo
-path: ~/cartographer-klipper
-channel: dev
-origin: https://github.com/Cartographer3D/cartographer-klipper.git
-env: ~/klippy-env/bin/python
-requirements: requirements.txt
-install_script: install.sh
-is_system_service: False
-managed_services: klipper
-info_tags:
-  desc=Cartographer Probe
-
-## Klippain Shake&Tune automatic update management
-[update_manager Klippain-ShakeTune]
-type: git_repo
-origin: https://github.com/Frix-x/klippain-shaketune.git
-path: ~/klippain_shaketune
-virtualenv: ~/klippy-env
-requirements: requirements.txt
-system_dependencies: system-dependencies.json
-primary_branch: main
-managed_services: klipper

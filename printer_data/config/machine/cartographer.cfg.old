@@ -1,33 +1,73 @@
-[mcu scanner]
-canbus_uuid: e3194a58fb88
+# [cartographer]
+# canbus_uuid = 8fd2e9a0b625
+# speed = 30.
+# lift_speed = 40.
+# backlash_comp = 0.5
+# x_offset = 0.0
+# y_offset = 21.1
+# trigger_distance = 2.
+# trigger_dive_threshold = 1.5
+# trigger_hysteresis = 0.006
+# cal_nozzle_z = 0.1
+# cal_floor = 0.1
+# cal_ceil = 5.
+# cal_speed = 1.0
+# cal_move_speed = 10.
+# default_model_name = default
+# mesh_main_direction = x
+# mesh_cluster_size = 1
+# mesh_runs = 2
+# tc_a_a:6.994963042827164e-06
+# tc_a_b:0.4778091610028035
+# tc_b_a:-0.00038306758849751944
+# tc_b_b:-181.3245823588002
 
 [scanner]
-mcu: scanner            
-#   Offsets are measured from the centre of your coil, to the tip of your nozzle 
-#   on a level axis. It is vital that this is accurate. 
-x_offset: 0                          
-#    adjust for your cartographers offset from nozzle to middle of coil
-y_offset: 21.1                         
-#    adjust for your cartographers offset from nozzle to middle of coil
-# backlash_comp: 0.5
-backlash_comp: 0.00334
+canbus_uuid = e3194a58fb88
+speed: 40.
+#   Z probing dive speed.
+lift_speed: 50.
+#   Z probing lift speed.
+backlash_comp: 0.5
 #   Backlash compensation distance for removing Z backlash before measuring
 #   the sensor response.
-sensor: cartographer
-#    this must be set as cartographer unless using IDM etc.
-sensor_alt: carto
-#    alternate name to call commands. CARTO_TOUCH etc      
+x_offset: 0.
+#   X offset of cartographer from the nozzle.
+y_offset: 21.1
+#   Y offset of cartographer from the nozzle.
+trigger_distance: 2.
+#   cartographer trigger distance for homing.
+trigger_dive_threshold: 1.5
+#   Threshold for range vs dive mode probing. Beyond `trigger_distance +
+#   trigger_dive_threshold` a dive will be used.
+trigger_hysteresis: 0.006
+#   Hysteresis on trigger threshold for untriggering, as a percentage of the
+#   trigger threshold.
+cal_nozzle_z: 0.1
+#   Expected nozzle offset after completing manual Z offset calibration.
+cal_floor: 0.1
+#   Minimum z bound on sensor response measurement.
+cal_ceil:5.
+#   Maximum z bound on sensor response measurement.
+cal_speed: 1.0
+#   Speed while measuring response curve.
+cal_move_speed: 10.
+#   Speed while moving to position for response curve measurement.
+default_model_name: default
+#   Name of default cartographer model to load.
+mesh_main_direction: x
+#   Primary travel direction during mesh measurement.
+#mesh_overscan: -1
+#   Distance to use for direction changes at mesh line ends. Omit this setting
+#   and a default will be calculated from line spacing and available travel.
+mesh_cluster_size: 1
+#   Radius of mesh grid point clusters.
 mesh_runs: 2
-#    Number of passes to make during mesh scan.
 calibration_method: touch
+sensor: cartographer
+sensor_alt: carto
 scanner_touch_z_offset: 0.15
 scanner_touch_max_retries: 6
-
-[temperature_sensor Cartographer_MCU]
-sensor_type: temperature_mcu
-sensor_mcu: scanner
-min_temp: 0
-max_temp: 105
 
 # [gcode_macro DATA_SAMPLE]
 # gcode:
